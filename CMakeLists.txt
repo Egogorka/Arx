@@ -59,10 +59,11 @@ enable_testing()
 
 add_executable(
         hello_test
-        tests/hello_test.cpp)
+        tests/hello_test.cpp tests/json.cpp)
 target_link_libraries(
         hello_test
         gtest_main
+        nlohmann_json::nlohmann_json
 )
 
 include(GoogleTest)
