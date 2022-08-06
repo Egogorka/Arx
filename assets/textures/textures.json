@@ -1,0 +1,12 @@
+[
+  {
+    "filename": "brick.png",
+    "tiles": [
+      {
+        "name": "BRICK",
+        "pos": [0, 0],
+        "orientation": "3x3"
+      }
+    ]
+  }
+]

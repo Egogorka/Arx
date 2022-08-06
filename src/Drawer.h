@@ -7,15 +7,19 @@
 
 #include <SFML/Graphics.hpp>
 #include "vector/Vector.h"
+#include <vector>
 
 #include "Box.h"
 
 class Drawer {
 protected:
-    Box2 camera;
+    sf::View camera;
+    std::vector<sf::Texture> textures;
 
+    sf::Window window;
 public:
-    Drawer(const Vector2f& size);
+    Drawer(const Vector2i& resolution);
+
 
 };
 
