@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.17)
 project(Arx)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -6,7 +6,14 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(Arx main.cpp
         utility/vector/Vector.h
         utility/vector/Vector.cpp
-        assets/segments/l.cpp src/Drawer.cpp src/Drawer.h src/Box.cpp src/Box.h assets/textures/l.cpp assets/textures/l.h)
+        assets/segments/l.cpp
+        src/Drawer.cpp
+        src/Drawer.h
+        src/Box.cpp
+        src/Box.h
+        assets/textures/l.cpp
+        assets/textures/l.h
+        )
 
 include_directories(src utility ../Arx)
 
