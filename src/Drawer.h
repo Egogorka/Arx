@@ -8,18 +8,26 @@
 #include <SFML/Graphics.hpp>
 #include "vector/Vector.h"
 #include <vector>
+#include <memory>
 
 #include "Box.h"
+
+#include "utility/ndarray/ndArrayView.h"
+#include "assets/textures/tiles.h"
+#include "src/drawer/TileSprite.h"
 
 class Drawer {
 protected:
     sf::View camera;
-    std::vector<sf::Texture> textures;
+    std::shared_ptr<std::vector<sf::Texture>> textures;
+    std::shared_ptr<std::vector<TileSpriteFactory>> factories;
 
-    sf::Window window;
+    sf::RenderWindow window;
 public:
-    Drawer(const Vector2i& resolution);
+    explicit Drawer(const Vector2i& resolution);
 
+    void drawTiles(const ndArrayView<Tiles,2>& tiles);
+    static Type getTileType(const ndArrayView<Tiles,2>& tiles, Vector2i position);
 
 };
 
