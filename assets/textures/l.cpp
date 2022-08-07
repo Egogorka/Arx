@@ -8,11 +8,40 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-std::vector<sf::Texture> load_textures() {
+#include <iostream>
+
+std::shared_ptr<std::vector<sf::Texture>> load_textures() {
     std::ifstream f("../assets/textures/textures.json");
 
-    json raw_data
+    auto out = std::make_shared<std::vector<sf::Texture>>();
+    json array_data = json::parse(f);
 
-    return nullptr;
+    out->reserve(array_data.size());
+    for(auto& data : array_data){
+        std::string path = "../assets/textures/" + data["filename"].get<std::string>();
+        out->emplace_back();
+        auto texture = out->rbegin();
+        if(!texture->loadFromFile(path)) {
+            std::cout << "Could not load texture with filename: " << data["filename"] << '\n';
+            break;
+        }
+    }
+    return out;
+}
+
+std::shared_ptr<std::vector<TileSpriteFactory>> init_factories(const std::shared_ptr<std::vector<sf::Texture>>& textures) {
+    // Poor design - need to open textures.json twice
+    std::ifstream f("../assets/textures/textures.json");
+
+    auto out = std::make_shared<std::vector<TileSpriteFactory>>();
+    json array_data = json::parse(f);
+    out->reserve(array_data.size());
+
+    auto iter = textures->begin();
+    for(auto& data : array_data){
+        auto pos = Vector2i{data["pos"][0].get<int>(), data["pos"][1].get<int>()};
+        out->emplace_back(*iter, pos);
+    }
+    return out;
 }
 

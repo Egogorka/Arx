@@ -3,9 +3,8 @@
     "filename": "brick.png",
     "tiles": [
       {
-        "name": "BRICK",
-        "pos": [0, 0],
-        "orientation": "3x3"
+        "name": "Brick",
+        "pos": [0, 0]
       }
     ]
   }

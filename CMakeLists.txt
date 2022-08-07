@@ -18,6 +18,8 @@ add_executable(Arx main.cpp
         utility/ndarray/ndArray.h
         src/drawer/TileSprite.cpp
         src/drawer/TileSprite.h
+        assets/textures/tiles.cpp
+        assets/textures/tiles.h
         )
 
 include_directories(src utility ../Arx)
