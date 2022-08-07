@@ -13,6 +13,9 @@ add_executable(Arx main.cpp
         src/Box.h
         assets/textures/l.cpp
         assets/textures/l.h
+        utility/ndarray/ndArrayBase.h
+        utility/ndarray/ndArrayView.h
+        utility/ndarray/ndArray.h
         )
 
 include_directories(src utility ../Arx)
@@ -66,7 +69,9 @@ enable_testing()
 
 add_executable(
         hello_test
-        tests/hello_test.cpp tests/json.cpp)
+        tests/hello_test.cpp
+        tests/json.cpp
+        tests/ndarray/ndarray_test.cpp)
 target_link_libraries(
         hello_test
         gtest_main
