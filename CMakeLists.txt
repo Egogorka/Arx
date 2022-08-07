@@ -16,6 +16,8 @@ add_executable(Arx main.cpp
         utility/ndarray/ndArrayBase.h
         utility/ndarray/ndArrayView.h
         utility/ndarray/ndArray.h
+        src/drawer/TileSprite.cpp
+        src/drawer/TileSprite.h
         )
 
 include_directories(src utility ../Arx)
