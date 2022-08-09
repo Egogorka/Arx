@@ -29,6 +29,7 @@ public:
     void drawTiles(const ndArrayView<Tiles,2>& tiles);
     static Type getTileType(const ndArrayView<Tiles,2>& tiles, Vector2i position);
 
+    void display();
 };
 
 

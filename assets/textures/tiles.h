@@ -8,9 +8,9 @@
 #include <map>
 
 enum class Tiles {
+    None = -1,
     Brick = 0,
     RotatableTiles = Brick,
-
 };
 
 extern std::map<std::string, Tiles> tilesMap;

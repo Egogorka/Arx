@@ -31,6 +31,7 @@ void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles) {
     for(int x = 0; x < size[0]; x++){
         for(int y = 0; y < size[1]; y++){
             Vector2i pos{x,y};
+            if(tiles[pos] == Tiles::None) continue;
             auto type = getTileType(tiles, pos);
             auto tile = factories->at(static_cast<int>(tiles[pos])).getTileSprite(type);
 
@@ -39,4 +40,8 @@ void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles) {
             window.draw(tile, transform);
         }
     }
+}
+
+void Drawer::display() {
+    window.display();
 }

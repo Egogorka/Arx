@@ -9,10 +9,6 @@
 #include <array>
 #include "vector/Vector.h"
 
-/**
- * This class encapsulates the bit-mask logic behind rotational tiles
- */
-
 enum class Direction {
     LU = 0, RU, RD, LD
 };

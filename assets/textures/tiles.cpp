@@ -5,5 +5,6 @@
 #include "tiles.h"
 
 std::map<std::string, Tiles> tilesMap{ // NOLINT(cert-err58-cpp)
+        {"None", Tiles::None},
         {"Brick", Tiles::Brick},
 };

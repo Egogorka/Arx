@@ -26,6 +26,7 @@ std::shared_ptr<std::vector<sf::Texture>> load_textures() {
             break;
         }
     }
+    f.close();
     return out;
 }
 
@@ -34,14 +35,25 @@ std::shared_ptr<std::vector<TileSpriteFactory>> init_factories(const std::shared
     std::ifstream f("../assets/textures/textures.json");
 
     auto out = std::make_shared<std::vector<TileSpriteFactory>>();
-    json array_data = json::parse(f);
-    out->reserve(array_data.size());
+    json textures_data = json::parse(f);
+
+    // Walk the json to reserve memory for vector
+    int size = 0;
+    for(auto& texture_data : textures_data) {
+        for (auto &tiles_data : texture_data["tiles"]) {
+            size += tiles_data.size();
+        }
+    }
+    out->reserve(size);
 
     auto iter = textures->begin();
-    for(auto& data : array_data){
-        auto pos = Vector2i{data["pos"][0].get<int>(), data["pos"][1].get<int>()};
-        out->emplace_back(*iter, pos);
+    for(auto& texture_data : textures_data){
+        for(auto& tiles_data : texture_data["tiles"]) {
+            auto pos = Vector2i{tiles_data["pos"][0].get<int>(), tiles_data["pos"][1].get<int>()};
+            out->emplace_back(*iter, pos);
+        }
     }
+    f.close();
     return out;
 }
 
