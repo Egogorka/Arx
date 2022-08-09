@@ -98,7 +98,7 @@ public:
 
     T at_def(Vector<int,N> multindex, T def) const {
         for(int i=0; i<N; i++){
-            if( multindex[i] < 0 or multindex[i] > size[i] ) return def;
+            if( multindex[i] < 0 or multindex[i] >= size[i] ) return def;
         }
         return (*this)[multindex];
     }

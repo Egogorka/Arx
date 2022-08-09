@@ -6,6 +6,10 @@
 #define ARX_UTILITY_NDARRAY_NDARRAY_H
 
 #include "ndArrayBase.h"
+
+template<typename T, size_t N>
+class ndArrayView;
+
 #include "ndArrayView.h"
 
 template<typename T, size_t N>

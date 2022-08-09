@@ -8,6 +8,11 @@
 #include "ndArrayBase.h"
 
 template<typename T, size_t N>
+class ndArray;
+
+#include "ndArray.h"
+
+template<typename T, size_t N>
 class ndArrayView : public ndArrayBase<T,N> {
 public:
     // Rule of five constructors
@@ -32,6 +37,9 @@ public:
     // Useful constructors
     ndArrayView(T* data, const std::array<int,N>& size)
     : ndArrayBase<T,N>(size, data){}
+
+    ndArrayView(const ndArray<T,N>& array)
+    : ndArrayBase<T,N>(array){}
 
 
 };
