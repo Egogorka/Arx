@@ -21,11 +21,12 @@ protected:
     ndArrayBase()
     :size(Vector<int,N>::all(1)), data{nullptr}{}
 
+public:
     ndArrayBase(const ndArrayBase& array) = default;
     ndArrayBase& operator=(const ndArrayBase& array) = default;
 
     ndArrayBase(ndArrayBase &&array) noexcept
-    :size(std::move(size)), data(array.data){
+    :size(std::move(array.size)), data(array.data){
         array.data = nullptr;
     }
 

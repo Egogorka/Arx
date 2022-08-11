@@ -45,6 +45,11 @@ public:
         return *this;
     }
 
+    // Only proper move-constructor is from another ndArray
+    // Because View has no ownership, and Base knows nothing about ownership
+    ndArray(ndArray&& array) noexcept
+    : ndArrayBase<T,N>(std::move(array)) {}
+
     //Useful constructors
     ndArray(T* data, const std::array<int,N>& size)
     : ndArray(ndArrayView<T,N>(data, size)){}
