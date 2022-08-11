@@ -7,10 +7,9 @@ add_executable(Arx main.cpp
         utility/vector/Vector.h
         utility/vector/Vector.cpp
         assets/segments/l.cpp
+        assets/segments/l.h
         src/Drawer.cpp
         src/Drawer.h
-        src/Box.cpp
-        src/Box.h
         assets/textures/l.cpp
         assets/textures/l.h
         utility/ndarray/ndArrayBase.h
