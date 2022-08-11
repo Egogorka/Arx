@@ -19,6 +19,8 @@ add_executable(Arx main.cpp
         src/drawer/TileSprite.h
         assets/textures/tiles.cpp
         assets/textures/tiles.h
+        src/Segment.cpp
+        src/Segment.h
         )
 
 include_directories(src utility ../Arx)
