@@ -7,6 +7,9 @@
 App::App()
 : is_running(false){
     drawer = std::make_shared<Drawer>(RESOLUTION);
+    eventer.add_event_listener(sf::Event::EventType::Closed, [this](){
+        this->end();
+    });
 }
 
 void App::start() {
@@ -14,13 +17,7 @@ void App::start() {
     while (is_running) {
         sf::Event event{};
         while (drawer->pollEvent(event)){
-            switch (event.type) {
-                case sf::Event::Closed:
-                    end();
-                    break;
-                default:
-                    break;
-            }
+            eventer.evoke(event);
         }
     }
 }

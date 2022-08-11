@@ -40,7 +40,7 @@ class Eventer {
 
 public:
     int add_event_listener(EventType type, const std::function<void(const Event&)>& func){
-        auto list = event_listeners[static_cast<int>(type)];
+        auto& list = event_listeners[static_cast<int>(type)];
         list.push_back(func);
         return list.size() - 1;
     }
