@@ -21,6 +21,9 @@ add_executable(Arx main.cpp
         assets/textures/tiles.h
         src/Segment.cpp
         src/Segment.h
+        src/App.cpp
+        src/App.h
+        utility/Eventer.h
         )
 
 include_directories(src utility ../Arx)

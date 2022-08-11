@@ -10,7 +10,6 @@
 #include <vector>
 #include <memory>
 
-#include "Box.h"
 
 #include "utility/ndarray/ndArrayView.h"
 #include "assets/textures/tiles.h"
@@ -18,18 +17,23 @@
 
 class Drawer {
 protected:
-    sf::View camera;
     std::shared_ptr<std::vector<sf::Texture>> textures;
     std::shared_ptr<std::vector<TileSpriteFactory>> factories;
 
     sf::RenderWindow window;
+
+    static Type getTileType(const ndArrayView<Tiles,2>& tiles, Vector2i position);
+    void draw(const sf::Drawable& drawable, float zlevel);
 public:
     explicit Drawer(const Vector2i& resolution);
 
-    void drawTiles(const ndArrayView<Tiles,2>& tiles);
-    static Type getTileType(const ndArrayView<Tiles,2>& tiles, Vector2i position);
 
+
+    bool pollEvent(sf::Event& event);
+
+    void drawTiles(const ndArrayView<Tiles,2>& tiles);
     void display();
+    void clear();
 };
 
 

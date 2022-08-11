@@ -36,7 +36,8 @@ void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles) {
             auto tile = factories->at(static_cast<int>(tiles[pos])).getTileSprite(type);
 
             sf::Transform transform;
-            transform.translate(float(32*x), float(32*y));
+            transform.translate(float(64*x), float(64*y));
+            transform.scale(2,2);
             window.draw(tile, transform);
         }
     }
@@ -44,4 +45,16 @@ void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles) {
 
 void Drawer::display() {
     window.display();
+}
+
+void Drawer::clear() {
+    window.clear();
+}
+
+bool Drawer::pollEvent(sf::Event &event) {
+    return window.pollEvent(event);
+}
+
+void Drawer::draw(const sf::Drawable& drawable, float zlevel) {
+
 }
