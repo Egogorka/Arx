@@ -26,7 +26,7 @@ Type Drawer::getTileType(const ndArrayView<Tiles, 2> &tiles, Vector2i position) 
     return Type(neighbors);
 }
 
-void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles) {
+void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles, float zlevel) {
     auto size = tiles.get_size();
     for(int x = 0; x < size[0]; x++){
         for(int y = 0; y < size[1]; y++){
@@ -35,12 +35,20 @@ void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles) {
             auto type = getTileType(tiles, pos);
             auto tile = factories->at(static_cast<int>(tiles[pos])).getTileSprite(type);
 
-            sf::Transform transform;
-            transform.translate(float(64*x), float(64*y));
-            transform.scale(2,2);
-            window.draw(tile, transform);
+            tile.setScale(scale,scale);
+
+//            sf::Transform transform;
+//            transform.translate(float(64*x), float(64*y));
+//            transform.scale(1,1);
+//            transform.rotate(45);
+//            window.draw(tile, transform);
+            draw(tile, get_vector_i2f(32*scale*pos), zlevel);
         }
     }
+}
+
+void Drawer::drawTiles(const ndArrayView<Tiles, 2> &tiles) {
+    drawTiles(tiles, 0.f);
 }
 
 void Drawer::display() {
@@ -55,6 +63,19 @@ bool Drawer::pollEvent(sf::Event &event) {
     return window.pollEvent(event);
 }
 
-void Drawer::draw(const sf::Drawable& drawable, float zlevel) {
+void Drawer::draw(const sf::Drawable& drawable, const Vector2f& pos, float zlevel, sf::Transform transform) {
+    // Calculate the transform
+    auto z_scale = parallax_offset / (parallax_scale * zlevel + parallax_offset);
+    auto parallax_pos = Vector2f{parallax_center[0]*window.getSize().x, parallax_center[1]*window.getSize().y};
+    sf::Transform parallax_transform = transform;
 
+    auto offset = pos * z_scale + (parallax_pos) * (1 - z_scale);
+
+    parallax_transform.translate(toSFMLvector(offset));
+    parallax_transform.scale(z_scale, z_scale);
+
+    sf::RenderStates states;
+    states.transform = parallax_transform;
+
+    window.draw(drawable, parallax_transform);
 }
