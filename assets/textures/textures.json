@@ -5,6 +5,10 @@
       {
         "name": "Brick",
         "pos": [0, 0]
+      },
+      {
+        "name": "Pollution",
+        "pos": [32, 0]
       }
     ]
   }

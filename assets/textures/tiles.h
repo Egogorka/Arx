@@ -10,6 +10,7 @@
 enum class Tiles {
     None = -1,
     Brick = 0,
+    Pollution,
     RotatableTiles = Brick,
 };
 
