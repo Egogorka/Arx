@@ -54,7 +54,7 @@ public:
     TileSprite getTileSprite(const Type& type);
 };
 
-struct TileSprite : public sf::Drawable {
+struct TileSprite : public sf::Drawable, sf::Transformable {
     std::array<sf::Sprite,4> subtiles;
 
     explicit TileSprite(const std::array<sf::Sprite,4>& subtiles);

@@ -104,6 +104,8 @@ TileSprite::TileSprite(const std::array<sf::Sprite, 4>& subtiles) // NOLINT(mode
 : subtiles(subtiles){}
 
 void TileSprite::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    states.transform *= getTransform();
+
     for(auto& sprite : subtiles){
         target.draw(sprite, states);
     }
