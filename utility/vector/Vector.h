@@ -136,23 +136,23 @@ template<typename T>
 class Vector<T,3>: public VectorBase<T, 3, Vector<T,3>> {
 public:
     T z() const {
-        return this->at(0);
+        return this->at(2);
     }
     T x() const {
-        return this->at(1);
+        return this->at(0);
     }
     T y() const {
-        return this->at(2);
+        return this->at(1);
     }
 
     T& z() {
-        return this->at(0);
+        return this->at(2);
     }
     T& x() {
-        return this->at(1);
+        return this->at(0);
     }
     T& y() {
-        return this->at(2);
+        return this->at(1);
     }
 
     Vector<T,2> getXY() const{
