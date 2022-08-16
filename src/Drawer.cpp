@@ -3,10 +3,14 @@
 //
 
 #include "Drawer.h"
+#include "utility/vector/sfConvert.h"
+
 #include "assets/textures/l.h"
+#include "assets/textures/dynamic/l.h"
 
 Drawer::Drawer(const Vector2i &resolution)
-: textures(load_textures()), factories(init_factories(textures))
+: static_textures(load_static_textures()), factories(init_factories(static_textures)),
+msprite_textures(load_dynamic_textures()), msprite_factories(init_msprite_factories(msprite_textures))
 {
     window.create(sf::VideoMode(resolution.x(), resolution.y()), "Arx", sf::Style::Default);
     window.setFramerateLimit(60);
@@ -35,14 +39,12 @@ void Drawer::drawTiles(const ndArrayView<Tiles, 2>& tiles, float zlevel) {
             auto type = getTileType(tiles, pos);
             auto tile = factories->at(static_cast<int>(tiles[pos])).getTileSprite(type);
 
-            tile.setScale(scale,scale);
-
 //            sf::Transform transform;
 //            transform.translate(float(64*x), float(64*y));
 //            transform.scale(1,1);
 //            transform.rotate(45);
 //            window.draw(tile, transform);
-            draw(tile, get_vector_i2f(32*scale*pos), zlevel);
+            draw(tile, get_vector_i2f(pos), zlevel);
         }
     }
 }
@@ -69,13 +71,19 @@ void Drawer::draw(const sf::Drawable& drawable, const Vector2f& pos, float zleve
     auto parallax_pos = Vector2f{parallax_center[0]*window.getSize().x, parallax_center[1]*window.getSize().y};
     sf::Transform parallax_transform = transform;
 
-    auto offset = pos * z_scale + (parallax_pos) * (1 - z_scale);
+    // times 32 because 1 = 1 tile
+    auto offset = (32*scale*pos) * z_scale + (parallax_pos) * (1 - z_scale);
 
     parallax_transform.translate(toSFMLvector(offset));
     parallax_transform.scale(z_scale, z_scale);
+    parallax_transform.scale(scale, scale);
 
     sf::RenderStates states;
     states.transform = parallax_transform;
 
     window.draw(drawable, parallax_transform);
+}
+
+void Drawer::drawMSprite(int index, const Vector3f& pos, int animation, int frame) {
+    draw(msprite_factories->at(index).get(animation, frame),pos.getXY(),pos.z());
 }

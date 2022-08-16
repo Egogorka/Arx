@@ -1,0 +1,25 @@
+[
+  {
+    "filename" : "testSprite.png",
+    "textures" :
+    [
+      {
+        "name" : "pedestal",
+        "pos" : [0, 0],
+        "size" : [32, 32],
+        "gap" : [0, 0],
+        "animations" :
+        [
+          {
+            "name" : "static",
+            "length" : 8
+          },
+          {
+            "name" : "falling",
+            "length" : 8
+          }
+        ]
+      }
+    ]
+  }
+]

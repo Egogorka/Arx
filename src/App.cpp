@@ -55,20 +55,27 @@ void App::start() {
            }
     });
 
+    int counter = 0;
     while (is_running) {
         sf::Event event{};
         drawer->clear();
 
-
         drawer->drawTiles(segments->at(0).tiles, 3);
         drawer->drawTiles(segments->at(0).tiles, 2);
+
         drawer->drawTiles(segments->at(0).tiles, 1);
+        drawer->drawMSprite(0,Vector3f{8,2,1},1, abs(counter - 6));
+
         drawer->drawTiles(segments->at(0).tiles);
+        drawer->drawMSprite(0,Vector3f{2,2,0},0, abs(counter - 6));
+
 
         while (drawer->pollEvent(event)){
             eventer.evoke(event);
         }
         drawer->display();
+
+        counter = (counter + 1) % 14;
     }
 }
 

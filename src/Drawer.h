@@ -15,10 +15,15 @@
 #include "assets/textures/tiles.h"
 #include "src/drawer/TileSprite.h"
 
+#include "src/drawer/Multisprite.h"
+
 class Drawer {
 protected:
-    std::shared_ptr<std::vector<sf::Texture>> textures;
+    std::shared_ptr<std::vector<sf::Texture>> static_textures;
     std::shared_ptr<std::vector<TileSpriteFactory>> factories;
+
+    std::shared_ptr<std::vector<sf::Texture>> msprite_textures;
+    std::shared_ptr<std::vector<MultispriteFactory>> msprite_factories;
 
     sf::RenderWindow window;
 
@@ -34,20 +39,12 @@ public:
 
     bool pollEvent(sf::Event& event);
 
+    void drawMSprite(int index, const Vector3f& pos, int animation, int frame);
+
     void drawTiles(const ndArrayView<Tiles,2>& tiles);
     void drawTiles(const ndArrayView<Tiles,2>& tiles, float zlevel);
     void display();
     void clear();
-
-    template<typename T>
-    static sf::Vector2<T> toSFMLvector(Vector<T,2> vector){
-        return sf::Vector2<T>{vector[0], vector[1]};
-    }
-
-    template<typename T>
-    static Vector<T,2> fromSFMLvector(sf::Vector2<T> vector){
-        return Vector<T,2>{vector[0], vector[1]};
-    }
 
 };
 

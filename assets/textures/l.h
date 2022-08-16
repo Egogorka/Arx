@@ -19,7 +19,7 @@
  * (atm no inner vector for easier implementation)
  * @return
  */
-std::shared_ptr<std::vector<sf::Texture>> load_textures();
+std::shared_ptr<std::vector<sf::Texture>> load_static_textures();
 
 
 /**

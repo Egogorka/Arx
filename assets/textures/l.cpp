@@ -10,7 +10,7 @@ using json = nlohmann::json;
 
 #include <iostream>
 
-std::shared_ptr<std::vector<sf::Texture>> load_textures() {
+std::shared_ptr<std::vector<sf::Texture>> load_static_textures() {
     std::ifstream f("../assets/textures/textures.json");
 
     auto out = std::make_shared<std::vector<sf::Texture>>();
@@ -18,7 +18,7 @@ std::shared_ptr<std::vector<sf::Texture>> load_textures() {
 
     out->reserve(array_data.size());
     for(auto& data : array_data){
-        std::string path = "../assets/textures/" + data["filename"].get<std::string>();
+        std::string path = "../assets/textures/static/" + data["filename"].get<std::string>();
         out->emplace_back();
         auto texture = out->rbegin();
         if(!texture->loadFromFile(path)) {

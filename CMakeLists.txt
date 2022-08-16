@@ -24,6 +24,11 @@ add_executable(Arx main.cpp
         src/App.cpp
         src/App.h
         utility/Eventer.h
+        assets/textures/dynamic/l.cpp
+        assets/textures/dynamic/l.h
+        src/drawer/Multisprite.cpp
+        src/drawer/Multisprite.h
+        utility/vector/sfConvert.h
         )
 
 include_directories(src utility ../Arx)
