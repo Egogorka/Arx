@@ -17,12 +17,14 @@ std::shared_ptr<std::vector<sf::Texture>> load_dynamic_textures() {
     json array_data = json::parse(f);
 
     out->reserve(array_data.size());
+    std::cout << "Loading textures: ...\n";
     for(auto& data : array_data){
         std::string path = "../assets/textures/dynamic/" + data["filename"].get<std::string>();
         out->emplace_back();
         auto texture = out->rbegin();
+        std::cout << "/assets/textures/dynamic/" << data["filename"] << '\n';
         if(!texture->loadFromFile(path)) {
-            std::cout << "Could not load texture with filename: " << data["filename"] << '\n';
+            std::cout << "Could not load texture with filename: " << data["filename"].get<std::string>() << '\n';
             break;
         }
     }
@@ -53,6 +55,7 @@ std::shared_ptr<std::vector<MultispriteFactory>> init_msprite_factories(const st
             auto gap = Vector2i{json_texture["gap"][0].get<int>(), json_texture["gap"][1].get<int>()};
             out->emplace_back(*iter, pos, size, gap);
         }
+        iter++;
     }
     f.close();
     return out;

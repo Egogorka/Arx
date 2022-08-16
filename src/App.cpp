@@ -17,8 +17,10 @@ App::App()
 void App::start() {
     is_running = true;
 
+    Vector3f player_pos{1,1,1};
+
     eventer.add_event_listener(sf::Event::EventType::KeyPressed,
-       [this](const sf::Event& event){
+       [this, &player_pos](const sf::Event& event){
            switch (event.key.code) {
                case sf::Keyboard::Comma: // <
                    drawer->parallax_scale /= 1.1;
@@ -50,6 +52,19 @@ void App::start() {
                    std::cout << "Parallax scale:  " << drawer->parallax_scale << '\n';
                    std::cout << "Parallax center: " << drawer->parallax_center << '\n';
                    break;
+               case sf::Keyboard::W:
+                   player_pos.y() += -.1;
+                   break;
+               case sf::Keyboard::A:
+                   player_pos.x() += -.1;
+                   break;
+               case sf::Keyboard::D:
+                   player_pos.x() += .1;
+                   break;
+               case sf::Keyboard::S:
+                   player_pos.y() += .1;
+                   break;
+
                default:
                    break;
            }
@@ -65,6 +80,7 @@ void App::start() {
 
         drawer->drawTiles(segments->at(0).tiles, 1);
         drawer->drawMSprite(0,Vector3f{8,2,1},1, abs(counter - 6));
+        drawer->drawMSprite(1,player_pos,0,counter % 4);
 
         drawer->drawTiles(segments->at(0).tiles);
         drawer->drawMSprite(0,Vector3f{2,2,0},0, abs(counter - 6));
