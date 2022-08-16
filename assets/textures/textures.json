@@ -1,7 +1,8 @@
 [
   {
     "filename": "brick.png",
-    "tiles": [
+    "tiles":
+    [
       {
         "name": "Brick",
         "pos": [0, 0]
