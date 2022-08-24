@@ -30,9 +30,9 @@ std::shared_ptr<std::vector<Segment>> load_segments() {
         ndArray<Tiles,2> temp{size};
         for(int i=0; i < size[1]; i++){ // fixate the row
             for(int j=0; j < size[0]; j++){ // fixate the column
-                auto cur_tile = symbols[std::string{map[i][j]}].get<std::string>();
-                temp[Vector2i{j,i}] = tilesMap[cur_tile];
-                std::cout << static_cast<int>(tilesMap[cur_tile]);
+                auto cur_tile = symbols[std::string{map[i][j]}].get<Tiles>();
+                temp[Vector2i{j,i}] = cur_tile;
+                std::cout << static_cast<int>(cur_tile);
             }
             std::cout << '\n';
         }

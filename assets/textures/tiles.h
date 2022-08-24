@@ -6,6 +6,7 @@
 #define ARX_ASSETS_TEXTURES_TILES_H
 
 #include <map>
+#include <nlohmann/json.hpp>
 
 enum class Tiles {
     None = -1,
@@ -14,6 +15,10 @@ enum class Tiles {
     RotatableTiles = Brick,
 };
 
-extern std::map<std::string, Tiles> tilesMap;
+NLOHMANN_JSON_SERIALIZE_ENUM( Tiles, {
+    {Tiles::None, "none"},
+    {Tiles::Brick, "brick"},
+    {Tiles::Pollution, "pollution"}
+})
 
 #endif //ARX_ASSETS_TEXTURES_TILES_H
