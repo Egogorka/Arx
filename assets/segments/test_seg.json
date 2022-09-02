@@ -3,9 +3,9 @@
     "size": [11, 11],
     "visual": {
       "symbols": {
-        "#": "Brick",
-        "%": "Pollution",
-        " ": "None"
+        "#": "brick",
+        "%": "pollution",
+        " ": "none"
       },
       "map": [
         "###########",
