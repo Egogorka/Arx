@@ -9,29 +9,15 @@
 #include "utility/ndarray/ndArray.h"
 #include "assets/segments/l.h"
 
+#include "include/entt.hpp"
+
+#include "assets/textures/dynamic/l.h"
+#include "assets/textures/l.h"
+
 int main() {
 
     App app{};
     app.start();
-
-//    Drawer drawer{{500,500}};
-//
-//    ndArray<Tiles,2> arr{
-//        {
-//            Tiles::Brick, Tiles::Brick, Tiles::Brick, Tiles::Brick, Tiles::Brick,
-//            Tiles::None,  Tiles::Brick, Tiles::None,  Tiles::None,  Tiles::Brick,
-//            Tiles::None,  Tiles::None,  Tiles::None,  Tiles::Brick, Tiles::None,
-//            Tiles::None,  Tiles::Brick, Tiles::None,  Tiles::None,  Tiles::Brick,
-//            Tiles::Brick, Tiles::Brick, Tiles::Brick, Tiles::Brick, Tiles::Brick,
-//        },
-//        {5, 5}
-//    };
-//
-//    drawer.drawTiles(arr);
-//    drawer.display();
-//
-//    int ex;
-//    std::cin >> ex;
 
     return 0;
 }

@@ -15,20 +15,28 @@
 #include "assets/textures/tiles.h"
 #include "src/drawer/TileSprite.h"
 
-#include "src/drawer/Multisprite.h"
 
+/**
+ * This classes purpose is to draw sf::Sprites isometrically
+ */
 class Drawer {
 protected:
-    std::shared_ptr<std::vector<sf::Texture>> static_textures;
-    std::shared_ptr<std::vector<TileSpriteFactory>> factories;
-
-    std::shared_ptr<std::vector<sf::Texture>> msprite_textures;
-    std::shared_ptr<std::vector<MultispriteFactory>> msprite_factories;
-
     sf::RenderWindow window;
 
-    static Type getTileType(const ndArrayView<Tiles,2>& tiles, Vector2i position);
-    void draw(const sf::Drawable& drawable, const Vector2f& pos, float zlevel, sf::Transform transform = sf::Transform::Identity);
+    struct ZSprite {
+        sf::Sprite sprite;
+        float zlevel;
+
+        Vector2f pos;
+        sf::Transform transform;
+
+        bool operator<(const ZSprite &rhs) const;
+        bool operator>(const ZSprite &rhs) const;
+        bool operator<=(const ZSprite &rhs) const;
+        bool operator>=(const ZSprite &rhs) const;
+    };
+
+    std::vector<ZSprite> sprites;
 public:
     explicit Drawer(const Vector2i& resolution);
 
@@ -39,13 +47,26 @@ public:
 
     bool pollEvent(sf::Event& event);
 
-    void drawMSprite(int index, const Vector3f& pos, int animation, int frame);
-
-    void drawTiles(const ndArrayView<Tiles,2>& tiles);
-    void drawTiles(const ndArrayView<Tiles,2>& tiles, float zlevel);
     void display();
     void clear();
 
+    // Can only queue drawing Sprites (sf::Drawable would be slower cuz pointer)
+    void reserve_queue(int n);
+    void queue(const sf::Sprite& drawable, const Vector2f& pos, float zlevel, sf::Transform transform = sf::Transform::Identity);
+    void queue(const sf::Sprite& drawable, const Vector3f& pos, sf::Transform transform = sf::Transform::Identity);
+
+    /**
+     * Displays all of the sprites in this.sprites
+     * As the cycle of display goes it calls back each time the integer point is 'crossed'
+     * @param callback - function that will be called back each time an integer z-level is met in cycle
+     * @param start_level - the starting z-level
+     * @param end_level - ending z-level
+     */
+    void display_sprites(const std::function<void(int)>& callback, int start_level, int end_level);
+
+    // The functions to draw drawables without the z-priorities
+    void draw(const sf::Drawable& drawable, const Vector2f& pos, float zlevel, sf::Transform transform = sf::Transform::Identity);
+    void draw(const sf::Drawable& drawable, const Vector3f& pos, sf::Transform transform = sf::Transform::Identity);
 };
 
 

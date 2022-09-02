@@ -13,11 +13,19 @@
 
 #include "assets/segments/l.h"
 
+#include "src/systems/SpriteSystem.h"
+#include "src/systems/TileSystem.h"
+
 #define RESOLUTION Vector2i{1000, 680}
 
 class App {
     std::shared_ptr<Drawer> drawer;
     Eventer<sf::Event,sf::Event::Count> eventer;
+
+    SpriteSystem spriteSystem;
+    TileSystem tileSystem;
+
+    entt::registry registry;
 
     bool is_running;
 

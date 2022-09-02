@@ -17,7 +17,6 @@ add_executable(Arx main.cpp
         utility/ndarray/ndArray.h
         src/drawer/TileSprite.cpp
         src/drawer/TileSprite.h
-        assets/textures/tiles.cpp
         assets/textures/tiles.h
         src/Segment.cpp
         src/Segment.h
@@ -26,9 +25,16 @@ add_executable(Arx main.cpp
         utility/Eventer.h
         assets/textures/dynamic/l.cpp
         assets/textures/dynamic/l.h
-        src/drawer/Multisprite.cpp
-        src/drawer/Multisprite.h
         utility/vector/sfConvert.h
+        src/components/MultispriteC.h
+        include/entt.hpp
+        assets/textures/dynamic/dynamic.h
+        src/systems/TileSystem.cpp
+        src/systems/TileSystem.h
+        src/systems/SpriteSystem.cpp
+        src/systems/SpriteSystem.h
+        src/components/LocationC.h
+        src/drawer/Multisprite.cpp
         )
 
 include_directories(src utility ../Arx)
@@ -62,10 +68,11 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
 target_link_libraries(Arx PRIVATE )
 
+include(FetchContent)
+
 ###########################################
 #Google tests
 
-include(FetchContent)
 FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
