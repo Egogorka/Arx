@@ -22,7 +22,7 @@ std::shared_ptr<std::vector<sf::Texture>> load_dynamic_textures() {
         std::string path = "../assets/textures/dynamic/" + data["filename"].get<std::string>();
         out->emplace_back();
         auto texture = out->rbegin();
-        std::cout << "/assets/textures/dynamic/" << data["filename"] << '\n';
+        std::cout << "/assets/textures/dynamic/" << data["filename"].get<std::string>() << '\n';
         if(!texture->loadFromFile(path)) {
             std::cout << "Could not load texture with filename: " << data["filename"].get<std::string>() << '\n';
             break;
@@ -32,12 +32,12 @@ std::shared_ptr<std::vector<sf::Texture>> load_dynamic_textures() {
     return out;
 }
 
-std::shared_ptr<std::vector<MultispriteFactory>> init_msprite_factories(const std::shared_ptr<std::vector<sf::Texture>>& textures) {
+std::shared_ptr<std::vector<Multisprite>> init_msprites(const std::shared_ptr<std::vector<sf::Texture>>& textures) {
     // Poor design - need to open textures.json twice
     std::ifstream f("../assets/textures/dynamic/texture.json");
 
     // Each MultispriteFactory corresponds to one entry in json[i].textures[j] - so there are more factories than textures
-    auto out = std::make_shared<std::vector<MultispriteFactory>>();
+    auto out = std::make_shared<std::vector<Multisprite>>();
     json json_files = json::parse(f);
 
     // Walk the json to reserve memory for vector
@@ -53,7 +53,14 @@ std::shared_ptr<std::vector<MultispriteFactory>> init_msprite_factories(const st
             auto pos = Vector2i{json_texture["pos"][0].get<int>(), json_texture["pos"][1].get<int>()};
             auto size = Vector2i{json_texture["size"][0].get<int>(), json_texture["size"][1].get<int>()};
             auto gap = Vector2i{json_texture["gap"][0].get<int>(), json_texture["gap"][1].get<int>()};
-            out->emplace_back(*iter, pos, size, gap);
+            std::vector<Animation> animations;
+            for(auto& animations_raw : json_texture["animations"]){
+                animations.emplace_back(
+                        animations_raw["length"].get<int>(),
+                        animations_raw["speed"].get<float>()
+                        );
+            }
+            out->emplace_back(*iter, pos, size, gap, std::move(animations));
         }
         iter++;
     }

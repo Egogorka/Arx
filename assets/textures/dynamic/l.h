@@ -27,6 +27,6 @@ std::shared_ptr<std::vector<sf::Texture>> load_dynamic_textures();
  * @param textures - textures of multisprites
  * @return
  */
-std::shared_ptr<std::vector<MultispriteFactory>> init_msprite_factories(const std::shared_ptr<std::vector<sf::Texture>>& textures);
+std::shared_ptr<std::vector<Multisprite>> init_msprites(const std::shared_ptr<std::vector<sf::Texture>>& textures);
 
 #endif //ARX_ASSETS_TEXTURES_DYNAMIC_L_H

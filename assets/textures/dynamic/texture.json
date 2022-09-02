@@ -12,11 +12,13 @@
         [
           {
             "name" : "static",
-            "length" : 8
+            "length" : 8,
+            "speed" : 0.5
           },
           {
             "name" : "falling",
-            "length" : 8
+            "length" : 8,
+            "speed" : 0.5
           }
         ]
       }
@@ -35,7 +37,8 @@
         [
           {
             "name" : "idle",
-            "length" : 4
+            "length" : 4,
+            "speed" : 0.5
           }
         ]
       }

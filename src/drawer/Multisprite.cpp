@@ -1,20 +1,11 @@
 //
-// Created by Meevere on 13.08.2022.
+// Created by Meevere on 01.09.2022.
 //
 
 #include "Multisprite.h"
 
-MultispriteFactory::MultispriteFactory(
-        sf::Texture &texture, const Vector2i &pos, const Vector2i &size, const Vector2i &gap)
-: texture(&texture), pos(pos), size(size), gap(gap) {}
+Multisprite::Multisprite(sf::Texture &texture, const Vector2i &pos, const Vector2i &size, const Vector2i &gap,
+                         std::vector<Animation>&& animations)
+ : texture(&texture), pos(pos), size(size), gap(gap), animations(std::move(animations)){}
 
-sf::Sprite MultispriteFactory::get(int animation, int frame) {
-    sf::Vector2i position{
-            pos[0] + (size[0] + gap[0]) * frame,
-            pos[1] + (size[1] + gap[1]) * animation
-    };
-    sf::Sprite out;
-    out.setTexture(*texture);
-    out.setTextureRect(sf::IntRect{position, toSFMLvector(size)});
-    return out;
-}
+Animation::Animation(int length, float speed) : length(length), speed(speed) {}

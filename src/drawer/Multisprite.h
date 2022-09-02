@@ -10,20 +10,23 @@
 #include "utility/vector/Vector.h"
 #include "utility/vector/sfConvert.h"
 
-class MultispriteFactory {
+struct Animation {
+    int length;
+    float speed;
 
+    Animation(int length, float speed);
+};
+
+
+struct Multisprite {
     sf::Texture* texture;
 
-    // Multisprite info
     Vector2i pos;
     Vector2i size;
     Vector2i gap;
+    std::vector<Animation> animations;
 
-public:
-    MultispriteFactory(sf::Texture &texture, const Vector2i &pos, const Vector2i &size, const Vector2i &gap);
-
-    sf::Sprite get(int animation, int frame);
+    Multisprite(sf::Texture &texture, const Vector2i &pos, const Vector2i &size, const Vector2i &gap, std::vector<Animation>&& animations);
 };
-
 
 #endif //ARX_SRC_DRAWER_MULTISPRITE_H
