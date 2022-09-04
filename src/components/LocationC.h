@@ -14,7 +14,7 @@ struct LocationC {
     Vector3f position;
     Vector3f velocity;
 
-    explicit LocationC(const Vector3f& position);
+    inline explicit LocationC(const Vector3f& position): position(), velocity() {};
 };
 
 #endif //TILES_H_SRC_COMPONENTS_LOCATIONC_H
