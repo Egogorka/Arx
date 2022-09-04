@@ -11,7 +11,7 @@
 #include "src/drawer/Multisprite.h"
 #include "components/MultispriteC.h"
 
-#include "assets/textures/dynamic/dynamic.h"
+#include "assets/dynamic.h"
 
 #include "include/entt.hpp"
 #include "src/Drawer.h"

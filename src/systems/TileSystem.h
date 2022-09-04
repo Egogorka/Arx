@@ -11,7 +11,7 @@
 #include <memory>
 
 #include "utility/ndarray/ndArrayView.h"
-#include "assets/textures/tiles.h"
+#include "assets/tiles.h"
 #include "src/drawer/TileSprite.h"
 
 #include "src/Drawer.h"

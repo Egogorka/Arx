@@ -10,14 +10,14 @@ add_executable(Arx main.cpp
         assets/segments/l.h
         src/Drawer.cpp
         src/Drawer.h
-        assets/textures/l.cpp
-        assets/textures/l.h
+        assets/textures/static/l.cpp
+        assets/textures/static/l.h
         utility/ndarray/ndArrayBase.h
         utility/ndarray/ndArrayView.h
         utility/ndarray/ndArray.h
         src/drawer/TileSprite.cpp
         src/drawer/TileSprite.h
-        assets/textures/tiles.h
+        assets/tiles.h
         src/Segment.cpp
         src/Segment.h
         src/App.cpp
@@ -28,14 +28,14 @@ add_executable(Arx main.cpp
         utility/vector/sfConvert.h
         src/components/MultispriteC.h
         include/entt.hpp
-        assets/textures/dynamic/dynamic.h
+        assets/dynamic.h
         src/systems/TileSystem.cpp
         src/systems/TileSystem.h
         src/systems/SpriteSystem.cpp
         src/systems/SpriteSystem.h
         src/components/LocationC.h
         src/drawer/Multisprite.cpp
-        )
+        src/components/LocationC.cpp)
 
 include_directories(src utility ../Arx)
 

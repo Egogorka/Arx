@@ -10,7 +10,7 @@
 #include <memory>
 
 #include "src/drawer/TileSprite.h"
-#include "tiles.h"
+#include "assets/tiles.h"
 
 /**
  * Loads all textures in /assets/textures that are listed in textures.json

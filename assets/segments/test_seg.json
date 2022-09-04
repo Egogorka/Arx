@@ -23,16 +23,10 @@
     },
     "collision": {
       "symbols": {
-        "#": "Collide",
-        " ": "Empty"
-      },
-      "map": [
-        "#######",
-        "#     #",
-        "#  #  #",
-        "       ",
-        "#######"
-      ]
+        "#": "collide",
+        "%": "collide",
+        " ": "empty"
+      }
     }
   }
 ]

@@ -12,7 +12,7 @@
 #include "include/entt.hpp"
 
 #include "assets/textures/dynamic/l.h"
-#include "assets/textures/l.h"
+#include "assets/textures/static/l.h"
 
 int main() {
 

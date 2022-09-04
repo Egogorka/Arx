@@ -4,7 +4,7 @@
 
 #include "TileSystem.h"
 
-#include "assets/textures/l.h"
+#include "assets/textures/static/l.h"
 
 TileSystem::TileSystem() {
     tile_textures = load_static_textures();

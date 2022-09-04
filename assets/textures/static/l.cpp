@@ -11,7 +11,7 @@ using json = nlohmann::json;
 #include <iostream>
 
 std::shared_ptr<std::vector<sf::Texture>> load_static_textures() {
-    std::ifstream f("../assets/textures/textures.json");
+    std::ifstream f("../assets/textures/static/texture.json");
 
     auto out = std::make_shared<std::vector<sf::Texture>>();
     json array_data = json::parse(f);
@@ -32,7 +32,7 @@ std::shared_ptr<std::vector<sf::Texture>> load_static_textures() {
 
 std::shared_ptr<std::vector<TileSpriteFactory>> init_factories(const std::shared_ptr<std::vector<sf::Texture>>& textures) {
     // Poor design - need to open textures.json twice
-    std::ifstream f("../assets/textures/textures.json");
+    std::ifstream f("../assets/textures/static/texture.json");
 
     auto out = std::make_shared<std::vector<TileSpriteFactory>>();
     json textures_data = json::parse(f);
