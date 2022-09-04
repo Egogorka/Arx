@@ -12,6 +12,9 @@
  */
 struct LocationC {
     Vector3f position;
+    Vector3f velocity;
+
+    explicit LocationC(const Vector3f& position);
 };
 
 #endif //TILES_H_SRC_COMPONENTS_LOCATIONC_H
