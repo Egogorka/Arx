@@ -64,12 +64,16 @@ void Drawer::queue(const sf::Sprite &drawable, const Vector3f &pos, sf::Transfor
 }
 
 void Drawer::display_sprites(const std::function<void(int)> &callback, int start_level, int end_level) {
-    for(auto& item: sprites){
-        while( start_level >= int(item.zlevel) && int(item.zlevel) >= end_level ){
+    for(auto& item: sprites) {
+        while (start_level >= int(item.zlevel) && start_level >= end_level){
             callback(start_level);
             start_level--;
         }
         draw(item.sprite, item.pos, item.zlevel, item.transform);
+    }
+    while( start_level >= end_level) {
+        callback(start_level);
+        start_level--;
     }
 }
 
