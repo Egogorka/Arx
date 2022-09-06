@@ -64,19 +64,23 @@ void App::start() {
 
     registry.emplace<LocationC>(player, Vector3f{1,1,1});
     registry.emplace<PlayerC>(player);
+    registry.emplace<CollisionC>(player, Vector2f{32,32});
     spriteSystem.assign(registry, player, Sprites::Player);
 
     sf::Clock clock;
     while (is_running) {
+        auto time = clock.restart();
+
         sf::Event event{};
         drawer->clear();
 
-        auto time = clock.restart();
+        controlsSystem.update(registry, *drawer);
+        physicsSystem.update(registry, this->segments->at(0).tiles, time);
+
         spriteSystem.render(registry, *drawer, time);
         drawer->display_sprites([this](int zlevel){
             this->tileSystem.render_partial(this->segments->at(0).tiles, zlevel, *drawer);
         }, 3, 0);
-        controlsSystem.update(registry, *drawer);
 
         while (drawer->pollEvent(event)){
             eventer.evoke(event);

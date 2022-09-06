@@ -16,6 +16,7 @@
 #include "src/systems/SpriteSystem.h"
 #include "src/systems/TileSystem.h"
 #include "src/systems/ControlsSystem.h"
+#include "src/systems/PhysicsSystem.h"
 
 #define RESOLUTION Vector2i{1000, 680}
 
@@ -26,6 +27,7 @@ class App {
     SpriteSystem spriteSystem;
     TileSystem tileSystem;
     ControlsSystem controlsSystem;
+    PhysicsSystem physicsSystem;
 
     entt::registry registry;
 

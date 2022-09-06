@@ -37,7 +37,11 @@ add_executable(Arx main.cpp
         src/drawer/Multisprite.cpp
         src/systems/ControlsSystem.cpp
         src/systems/ControlsSystem.h
-        src/components/PlayerC.h)
+        src/components/PlayerC.h
+        src/components/CollisionC.h
+        src/systems/PhysicsSystem.cpp
+        src/systems/PhysicsSystem.h
+        )
 
 include_directories(src utility ../Arx)
 

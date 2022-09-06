@@ -21,7 +21,6 @@ void SpriteSystem::render(entt::registry& registry, Drawer &drawer, sf::Time& ti
 }
 
 sf::Sprite SpriteSystem::getSprite(MultispriteC &sprite) {
-    std::cout << int(sprite.current) << '\n';
     sf::Vector2i position{
             sprite.multisprite->pos[0] + (sprite.multisprite->size[0] + sprite.multisprite->gap[0]) * int(sprite.current),
             sprite.multisprite->pos[1] + (sprite.multisprite->size[1] + sprite.multisprite->gap[1]) * sprite.animation
