@@ -67,6 +67,9 @@ public:
     // The functions to draw drawables without the z-priorities
     void draw(const sf::Drawable& drawable, const Vector2f& pos, float zlevel, sf::Transform transform = sf::Transform::Identity);
     void draw(const sf::Drawable& drawable, const Vector3f& pos, sf::Transform transform = sf::Transform::Identity);
+
+    // For testing
+    void draw_circle(const Vector2f& pos, float zlevel, sf::Color color = sf::Color::Yellow, float radius = 1.0f);
 };
 
 

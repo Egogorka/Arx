@@ -9,7 +9,9 @@
 #include "src/components/CollisionC.h"
 
 App::App()
-: is_running(false), spriteSystem(), tileSystem(){
+:   registry(),
+    is_running(false), spriteSystem(), tileSystem(), physicsSystem(&registry)
+{
     drawer = std::make_shared<Drawer>(RESOLUTION);
     segments = load_segments();
 
@@ -75,7 +77,7 @@ void App::start() {
         drawer->clear();
 
         controlsSystem.update(registry, *drawer);
-        physicsSystem.update(registry, this->segments->at(0).tiles, time);
+        physicsSystem.update(this->segments->at(0).tiles, time, *drawer);
 
         spriteSystem.render(registry, *drawer, time);
         drawer->display_sprites([this](int zlevel){

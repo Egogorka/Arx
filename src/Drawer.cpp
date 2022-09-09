@@ -34,6 +34,7 @@ void Drawer::draw(const sf::Drawable& drawable, const Vector2f& pos, float zleve
     sf::Transform parallax_transform = transform;
 
     // times 32 because 1 = 1 tile
+
     auto offset = (32*scale*pos) * z_scale + (parallax_pos) * (1 - z_scale);
 
     parallax_transform.translate(toSFMLvector(offset));
@@ -77,6 +78,11 @@ void Drawer::display_sprites(const std::function<void(int)> &callback, int start
     }
 }
 
+void Drawer::draw_circle(const Vector2f &pos, float zlevel, sf::Color color, float radius) {
+    sf::CircleShape circle{radius};
+    circle.setFillColor(color);
+    draw(circle, pos, zlevel);
+}
 
 bool Drawer::ZSprite::operator<(const Drawer::ZSprite &rhs) const { return zlevel > rhs.zlevel; }
 bool Drawer::ZSprite::operator>(const Drawer::ZSprite &rhs) const { return rhs < *this; }

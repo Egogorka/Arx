@@ -12,12 +12,43 @@
 
 #include <SFML/Graphics.hpp>
 
+// For debug
+#include "Drawer.h"
+
 /**
  * Handles moving and collisions
  */
 class PhysicsSystem {
+    entt::registry *registry;
+
 public:
-    void update(entt::registry& registry, const ndArrayView<Tiles, 2> &tiles, sf::Time& time);
+    explicit PhysicsSystem(entt::registry *registry);
+
+    void update(const ndArrayView<Tiles, 2> &tiles, sf::Time& time, Drawer& drawer);
+
+public:
+    struct PointFloat {
+        Vector2f pt;
+        float t;
+
+        friend std::ostream& operator<<(std::ostream& out, const PointFloat& vec);
+    };
+
+private:
+    struct Rect {
+        Vector2f pos;
+        Vector2f size;
+    };
+
+    struct PointLine {
+        Vector2f p1;
+        Vector2f p2;
+
+        [[nodiscard]] PointFloat vline_cross(float a) const;
+        [[nodiscard]] PointFloat hline_cross(float a) const;
+    };
+
+    bool line_rect_collision(const PointLine& line, const Rect& rect, Vector2f& collision_point, float& t, Vector2f& dir, Drawer& drawer);
 };
 
 

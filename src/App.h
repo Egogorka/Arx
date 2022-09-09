@@ -24,12 +24,12 @@ class App {
     std::shared_ptr<Drawer> drawer;
     Eventer<sf::Event,sf::Event::Count> eventer;
 
+    entt::registry registry;
+
     SpriteSystem spriteSystem;
     TileSystem tileSystem;
     ControlsSystem controlsSystem;
     PhysicsSystem physicsSystem;
-
-    entt::registry registry;
 
     bool is_running;
 
