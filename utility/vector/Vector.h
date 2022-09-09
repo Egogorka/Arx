@@ -94,6 +94,37 @@ public:
         out << vec.back();
         return out;
     }
+
+    // Not that accepted properties
+    friend Derived operator/(T first, cvecr vec){
+        Derived out{vec};
+        out *= (1/first) * vec;
+        return out;
+    }
+
+    friend Derived operator/(cvecr first, cvecr second){
+        Derived out{first};
+        for(unsigned i = 0; i < N-1; ++i){
+            out[i] = first[i] / second[i];
+        }
+        return out;
+    }
+
+    friend Derived operator*(cvecr first, cvecr second){
+        Derived out{first};
+        for(unsigned i = 0; i < N-1; ++i){
+            out[i] = first[i] * second[i];
+        }
+        return out;
+    }
+
+    friend T dot(cvecr first, cvecr second){
+        T out{};
+        for(unsigned i = 0; i < N-1; ++i){
+            out += first[i] * second[i];
+        }
+        return out;
+    }
 };
 
 /**
