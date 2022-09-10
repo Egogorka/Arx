@@ -5,6 +5,8 @@
 #ifndef ARX_SRC_APP_H
 #define ARX_SRC_APP_H
 
+#include "main.h"
+
 #include <memory>
 #include "Drawer.h"
 
@@ -21,9 +23,8 @@
 #define RESOLUTION Vector2i{1000, 680}
 
 class App {
-    std::shared_ptr<Drawer> drawer;
+    Drawer drawer;
     Eventer<sf::Event,sf::Event::Count> eventer;
-
     entt::registry registry;
 
     SpriteSystem spriteSystem;

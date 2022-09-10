@@ -70,6 +70,8 @@ public:
 
     // For testing
     void draw_circle(const Vector2f& pos, float zlevel, sf::Color color = sf::Color::Yellow, float radius = 1.0f);
+    void draw_rect(const Vector2f& pos, const Vector2f& size, float zlevel, sf::Color color = sf::Color::Red, float width = 1.0f);
+//    void draw_line(const Vector2f& pos1, const Vector2f& pos2, float zlevel, sf::Color color = sf::Color::Red, float width = 1.0f);
 };
 
 

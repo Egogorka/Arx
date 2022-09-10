@@ -41,7 +41,7 @@ add_executable(Arx main.cpp
         src/components/CollisionC.h
         src/systems/PhysicsSystem.cpp
         src/systems/PhysicsSystem.h
-        )
+        main.h)
 
 include_directories(src utility ../Arx)
 

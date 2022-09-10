@@ -84,6 +84,26 @@ void Drawer::draw_circle(const Vector2f &pos, float zlevel, sf::Color color, flo
     draw(circle, pos, zlevel);
 }
 
+void Drawer::draw_rect(const Vector2f &pos, const Vector2f &size, float zlevel, sf::Color color, float width) {
+    sf::RectangleShape rect{toSFMLvector(size)};
+    rect.setFillColor(sf::Color::Transparent);
+    rect.setOutlineColor(color);
+    rect.setOutlineThickness(width);
+    draw(rect, pos, zlevel);
+}
+
+//void Drawer::draw_line(const Vector2f &pos1, const Vector2f &pos2, float zlevel, sf::Color color, float width) {
+//    auto d = pos2-pos1;
+//    sf::RectangleShape rect{sf::Vector2f{sqrtf(Vector2f::square(d)),width}};
+//    rect.setFillColor(color);
+//
+//    float angle = atanf(d.y()/d.x());
+//    angle += d.x() > 0 ? 180. : 0.;
+//    rect.rotate(angle);
+//
+//    draw(rect, pos1, zlevel);
+//}
+
 bool Drawer::ZSprite::operator<(const Drawer::ZSprite &rhs) const { return zlevel > rhs.zlevel; }
 bool Drawer::ZSprite::operator>(const Drawer::ZSprite &rhs) const { return rhs < *this; }
 bool Drawer::ZSprite::operator<=(const Drawer::ZSprite &rhs) const { return !(rhs < *this); }

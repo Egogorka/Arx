@@ -118,12 +118,16 @@ public:
         return out;
     }
 
-    friend T dot(cvecr first, cvecr second){
+    static T dot(cvecr first, cvecr second){
         T out{};
         for(unsigned i = 0; i < N-1; ++i){
             out += first[i] * second[i];
         }
         return out;
+    }
+
+    static T square(cvecr vec){
+        return dot(vec,vec);
     }
 };
 

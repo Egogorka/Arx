@@ -1,5 +1,7 @@
 #include <iostream>
 
+#define ARX_DEBUG
+
 #include <SFML/Graphics.hpp>
 #include <Drawer.h>
 #include "src/App.h"
