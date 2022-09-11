@@ -12,4 +12,6 @@
 struct CollisionC {
     // Existence of LocationC is implied
     Vector2f size;
+
+
 };

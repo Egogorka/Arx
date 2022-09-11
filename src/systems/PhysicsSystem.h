@@ -36,6 +36,10 @@ public:
     void update(const ndArrayView<Tiles, 2> &tiles, sf::Time& time);
 
 private:
+    static inline Vector2f next_pos(const Vector2f& pos, const Vector2f& vel, const sf::Time& time){
+        return pos + vel/16 * time.asMilliseconds();
+    }
+
     struct PointNTime {
         Vector2f pt;
         float t;
@@ -49,18 +53,16 @@ private:
     struct Line {
         Vector2f p1;
         Vector2f p2;
-
-        [[nodiscard]] PointNTime vline_cross(float a) const;
-        [[nodiscard]] PointNTime hline_cross(float a) const;
     };
 
     struct RectVel {
-        Rect rect;
-        Vector2f vel;
+        Rect& rect;
+        Vector2f& vel;
     };
 
     bool line_rect_collision(const Line& line, const Rect& rect, Vector2f& collision_point, float& t, Vector2f& dir);
-    bool resolve_collision(const Line);
+    bool rectVel_rect_collision(const RectVel& rect1, const Rect& rect2, sf::Time& time, Vector2f& cp, float& ct, Vector2f& dir);
+    bool resolve_collision(RectVel& rect1, const Rect& rect2, sf::Time& time);
 };
 
 

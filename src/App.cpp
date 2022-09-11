@@ -71,9 +71,9 @@ void App::start() {
 
     auto player = registry.create();
 
-    registry.emplace<LocationC>(player, Vector3f{1,1,1});
+    registry.emplace<LocationC>(player, Vector3f{1.5,1.5,0}, Vector3f{0.01, 0.01, 0});
     registry.emplace<PlayerC>(player);
-    registry.emplace<CollisionC>(player, Vector2f{32,32});
+    registry.emplace<CollisionC>(player, Vector2f{1,1});
     spriteSystem.assign(registry, player, Sprites::Player);
 
     sf::Clock clock;
