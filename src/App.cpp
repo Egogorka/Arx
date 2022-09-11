@@ -73,7 +73,7 @@ void App::start() {
 
     registry.emplace<LocationC>(player, Vector3f{1.5,1.5,0}, Vector3f{0.01, 0.01, 0});
     registry.emplace<PlayerC>(player);
-    registry.emplace<CollisionC>(player, Vector2f{1,1});
+    registry.emplace<CollisionC>(player, Vector2f{27-8,32-7}, Vector2f{8,7});
     spriteSystem.assign(registry, player, Sprites::Player);
 
     sf::Clock clock;

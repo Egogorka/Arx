@@ -104,13 +104,13 @@ void PhysicsSystem::update(const ndArrayView<Tiles, 2> &tiles, sf::Time& time) {
         Vector2f velocity = location.velocity.getXY();
         Vector2f position = location.position.getXY();
 
-        Rect entityRect{position, collision.size};
+        Rect entityRect{position + collision.offset/32, collision.size/32};
 
-        Line line{location.position.getXY(), PhysicsSystem::next_pos(position, velocity, time)};
+        Line line{position, PhysicsSystem::next_pos(position, velocity, time)};
         auto size = tiles.get_size();
 
 #ifdef ARX_DEBUG
-        drawer->draw_rect(location.position.getXY(), 32*collision.size, location.position.z());
+        drawer->draw_rect(entityRect.pos, 32*entityRect.size, location.position.z());
 #endif
 
         auto tile_size = Vector2f{1,1};
