@@ -18,6 +18,7 @@ App::App()
     #else
     physicsSystem(&registry),
     #endif
+    gravitySystem(&registry),
     is_running(false)
 {
     segments = load_segments();
@@ -74,6 +75,7 @@ void App::start() {
     registry.emplace<LocationC>(player, Vector3f{1.5,1.5,0}, Vector3f{0.01, 0.01, 0});
     registry.emplace<PlayerC>(player);
     registry.emplace<CollisionC>(player, Vector2f{27-8,32-7}, Vector2f{8,7});
+    registry.emplace<GravityC>(player);
     spriteSystem.assign(registry, player, Sprites::Player);
 
     sf::Clock clock;
@@ -84,6 +86,7 @@ void App::start() {
         drawer.clear();
 
         controlsSystem.update(registry, drawer);
+        gravitySystem.update(time);
         physicsSystem.update(this->segments->at(0).tiles, time);
 
         spriteSystem.render(registry, drawer, time);

@@ -19,6 +19,7 @@
 #include "src/systems/TileSystem.h"
 #include "src/systems/ControlsSystem.h"
 #include "src/systems/PhysicsSystem.h"
+#include "src/systems/GravitySystem.h"
 
 #define RESOLUTION Vector2i{1000, 680}
 
@@ -31,6 +32,7 @@ class App {
     TileSystem tileSystem;
     ControlsSystem controlsSystem;
     PhysicsSystem physicsSystem;
+    GravitySystem gravitySystem;
 
     bool is_running;
 
