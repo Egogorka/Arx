@@ -97,7 +97,7 @@ add_executable(
         hello_test
         tests/hello_test.cpp
         tests/json.cpp
-        tests/ndarray/ndarray_test.cpp)
+        tests/ndarray/ndarray_test.cpp tests/vector/vector_test.cpp)
 target_link_libraries(
         hello_test
         gtest_main

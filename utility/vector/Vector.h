@@ -15,8 +15,8 @@ class VectorBase: public array<T,N> {
     typedef const Derived& cvecr;
     typedef Derived& vecr;
 public:
-    static VectorBase all(T a){
-        VectorBase out;
+    static Derived all(T a){
+        Derived out;
         for(auto& elem : out ){
             elem = a;
         }
@@ -89,30 +89,42 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& out, cvecr vec){
-        for(unsigned i = 0; i < N-1; ++i)
+        for(unsigned i = 0; i < N; ++i)
             out << vec[i] << ' ';
         out << vec.back();
         return out;
     }
 
     // Not that accepted properties
-    friend Derived operator/(T first, cvecr vec){
-        Derived out{vec};
-        out *= (1/first) * vec;
-        return out;
+    vecr operator*=(cvecr vec){
+        for(unsigned i = 0; i < N; ++i){
+            this->at(i) *= vec[i];
+        }
+        return *(static_cast<Derived*>(this));
+    }
+
+    vecr operator/=(cvecr vec){
+        for(unsigned i = 0; i < N; ++i){
+            this->at(i) /= vec[i];
+        }
+        return *(static_cast<Derived*>(this));
     }
 
     friend Derived operator/(cvecr first, cvecr second){
         Derived out{first};
-        for(unsigned i = 0; i < N-1; ++i){
+        for(unsigned i = 0; i < N; ++i){
             out[i] = first[i] / second[i];
         }
         return out;
     }
 
+    friend Derived operator/(T first, cvecr vec){
+        return all(first) / vec;
+    }
+
     friend Derived operator*(cvecr first, cvecr second){
         Derived out{first};
-        for(unsigned i = 0; i < N-1; ++i){
+        for(unsigned i = 0; i < N; ++i){
             out[i] = first[i] * second[i];
         }
         return out;
@@ -120,7 +132,7 @@ public:
 
     static T dot(cvecr first, cvecr second){
         T out{};
-        for(unsigned i = 0; i < N-1; ++i){
+        for(unsigned i = 0; i < N; ++i){
             out += first[i] * second[i];
         }
         return out;
@@ -170,23 +182,23 @@ public:
 template<typename T>
 class Vector<T,3>: public VectorBase<T, 3, Vector<T,3>> {
 public:
-    T z() const {
+    inline T z() const {
         return this->at(2);
     }
-    T x() const {
+    inline T x() const {
         return this->at(0);
     }
-    T y() const {
+    inline T y() const {
         return this->at(1);
     }
 
-    T& z() {
+    inline T& z() {
         return this->at(2);
     }
-    T& x() {
+    inline T& x() {
         return this->at(0);
     }
-    T& y() {
+    inline T& y() {
         return this->at(1);
     }
 
