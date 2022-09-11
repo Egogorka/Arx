@@ -85,11 +85,18 @@ void Drawer::draw_circle(const Vector2f &pos, float zlevel, sf::Color color, flo
 }
 
 void Drawer::draw_rect(const Vector2f &pos, const Vector2f &size, float zlevel, sf::Color color, float width) {
+    auto temp = pos;
+    if(size.x() < 0){
+        temp.x() += size.x();
+    }
+    if(size.y() < 0){
+        temp.y() += size.y();
+    }
     sf::RectangleShape rect{toSFMLvector(size)};
     rect.setFillColor(sf::Color::Transparent);
     rect.setOutlineColor(color);
     rect.setOutlineThickness(width);
-    draw(rect, pos, zlevel);
+    draw(rect, temp, zlevel);
 }
 
 //void Drawer::draw_line(const Vector2f &pos1, const Vector2f &pos2, float zlevel, sf::Color color, float width) {
