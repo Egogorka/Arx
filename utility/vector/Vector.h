@@ -89,7 +89,7 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& out, cvecr vec){
-        for(unsigned i = 0; i < N; ++i)
+        for(unsigned i = 0; i < N-1; ++i)
             out << vec[i] << ' ';
         out << vec.back();
         return out;
