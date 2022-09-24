@@ -20,6 +20,7 @@
 #include "src/systems/ControlsSystem.h"
 #include "src/systems/PhysicsSystem.h"
 #include "src/systems/GravitySystem.h"
+#include "src/systems/CameraSystem.h"
 
 #define RESOLUTION Vector2i{1000, 680}
 
@@ -33,6 +34,7 @@ class App {
     ControlsSystem controlsSystem;
     PhysicsSystem physicsSystem;
     GravitySystem gravitySystem;
+    CameraSystem cameraSystem;
 
     bool is_running;
 

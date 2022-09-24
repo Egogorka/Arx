@@ -40,12 +40,17 @@ protected:
 public:
     explicit Drawer(const Vector2i& resolution);
 
+    // In tiles
+    Vector3f offset{0.f,0.f,0.f};
+
     Vector2f parallax_center{0.5f,0.0f};
     float parallax_offset = 5.0f;
     float parallax_scale = 0.15f;
     float scale = 2;
 
-    bool pollEvent(sf::Event& event);
+    Vector2f get_size();
+
+    bool pollEvent(sf::Event& event); // might need to take this out of the drawer
 
     void display();
     void clear();
@@ -72,6 +77,8 @@ public:
     void draw_circle(const Vector2f& pos, float zlevel, sf::Color color = sf::Color::Yellow, float radius = 1.0f);
     void draw_rect(const Vector2f& pos, const Vector2f& size, float zlevel, sf::Color color = sf::Color::Red, float width = 1.0f);
 //    void draw_line(const Vector2f& pos1, const Vector2f& pos2, float zlevel, sf::Color color = sf::Color::Red, float width = 1.0f);
+
+    void draw_raw(const sf::Drawable& drawable);
 };
 
 

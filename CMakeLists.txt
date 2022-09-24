@@ -54,8 +54,8 @@ add_executable(Arx main.cpp
 
 
 
-
-        )
+        src/components/CameraLock.h
+        src/systems/CameraSystem.cpp src/systems/CameraSystem.h)
 
 include_directories(src utility ../Arx)
 

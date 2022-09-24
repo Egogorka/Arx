@@ -29,21 +29,19 @@ bool Drawer::pollEvent(sf::Event &event) {
 
 void Drawer::draw(const sf::Drawable& drawable, const Vector2f& pos, float zlevel, sf::Transform transform) {
     // Calculate the transform
-    auto z_scale = parallax_offset / (parallax_scale * zlevel + parallax_offset);
+    auto z_scale = parallax_offset / (parallax_scale * (zlevel - offset.z()) + parallax_offset);
     auto parallax_pos = Vector2f{parallax_center[0]*window.getSize().x, parallax_center[1]*window.getSize().y};
     sf::Transform parallax_transform = transform;
 
     // times 32 because 1 = 1 tile
+    auto _offset = (32*scale*(pos - offset.getXY())) * z_scale + (parallax_pos) * (1 - z_scale);
 
-    auto offset = (32*scale*pos) * z_scale + (parallax_pos) * (1 - z_scale);
-
-    parallax_transform.translate(toSFMLvector(offset));
+    parallax_transform.translate(toSFMLvector(_offset));
     parallax_transform.scale(z_scale, z_scale);
     parallax_transform.scale(scale, scale);
 
     sf::RenderStates states;
     states.transform = parallax_transform;
-
     window.draw(drawable, parallax_transform);
 }
 
@@ -97,6 +95,15 @@ void Drawer::draw_rect(const Vector2f &pos, const Vector2f &size, float zlevel, 
     rect.setOutlineColor(color);
     rect.setOutlineThickness(width);
     draw(rect, temp, zlevel);
+}
+
+void Drawer::draw_raw(const sf::Drawable &drawable) {
+    window.draw(drawable);
+}
+
+Vector2f Drawer::get_size() {
+    auto temp = window.getSize();
+    return Vector2f{float(temp.x), float(temp.y)};
 }
 
 //void Drawer::draw_line(const Vector2f &pos1, const Vector2f &pos2, float zlevel, sf::Color color, float width) {
