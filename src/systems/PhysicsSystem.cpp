@@ -43,10 +43,18 @@ bool PhysicsSystem::line_rect_collision(const PhysicsSystem::Line &line, const P
     drawer->draw_circle(fy, 0);
 #endif
 
+    // Check if line crosses rectangle
     if( near.x() > far.y() || near.y() > far.x() ) return false;
-    // Collision happened
 
-    t = std::max(near.x(), near.y());
+    // Check if interval is inside of it
+    auto far_t = std::min(far.x(), far.y());
+    auto near_t = std::max(near.x(), near.y());
+
+    if( near_t > 1.f ) return false;
+    if( far_t  < 0.f ) return false;
+
+    t = near_t;
+
     collision_point = line.p1 + t * raydir;
 
     dir = {0, 0};
@@ -103,19 +111,33 @@ void PhysicsSystem::update(const ndArrayView<Tiles, 2> &tiles, sf::Time& time) {
     registry->view<LocationC, CollisionC>().each([&](auto entity, LocationC& location, CollisionC& collision){
         Vector2f velocity = location.velocity.getXY();
         Vector2f position = location.position.getXY();
+        Vector2f colbox_pos = position + collision.offset/32;
+        auto next_pos = PhysicsSystem::next_pos(position, velocity, time);
 
-        Rect entityRect{position + collision.offset/32, collision.size/32};
+        Rect entityRect{colbox_pos, collision.size/32};
 
-        Line line{position, PhysicsSystem::next_pos(position, velocity, time)};
+        Line line{position, next_pos};
+
         auto size = tiles.get_size();
+        auto tile_size = Vector2f{1,1};
 
 #ifdef ARX_DEBUG
         drawer->draw_rect(entityRect.pos, 32*entityRect.size, location.position.z());
 #endif
+        auto [f_top_left, f_bottom_right] = bounding_box({entityRect, velocity}, time);
 
-        auto tile_size = Vector2f{1,1};
-        for(int x = 0; x < size[0]; x++){
-            for(int y = 0; y < size[1]; y++){
+        f_top_left += Vector2f{-.1f,-.1f};
+        f_bottom_right += Vector2f{.1f,.1f};
+
+        Vector2i top_left{(int)floorf(f_top_left.x()),(int)floorf(f_top_left.y())};
+        Vector2i bottom_right{(int)floorf(f_bottom_right.x()+1), (int)floorf(f_bottom_right.y()+1)};
+
+#ifdef ARX_DEBUG
+        drawer->draw_rect(get_vector_i2f(top_left), 32*get_vector_i2f(bottom_right-top_left), location.position.z(), sf::Color::Green);
+#endif
+
+        for(int x = std::max(0, top_left.x()); x < size[0] && x < bottom_right.x(); x++){
+            for(int y = std::max(0, top_left.y()); y < size[1] && y < bottom_right.y(); y++){
                 Vector2i pos{x,y};
                 if(tiles[pos] != Tiles::Brick) continue;
 
@@ -124,11 +146,33 @@ void PhysicsSystem::update(const ndArrayView<Tiles, 2> &tiles, sf::Time& time) {
 
                 if(resolve_collision(rectVel, rect, time)){
                     std::cout << "collision!\n";
+#ifdef ARX_DEBUG
+                    drawer->draw_rect(rect.pos, 32*rect.size, location.position.z(), sf::Color::Green);
+#endif
                 }
             }
         }
         location.velocity.x() = velocity.x(); location.velocity.y() = velocity.y();
-        auto next_pos = PhysicsSystem::next_pos(position, velocity, time);
+        next_pos = PhysicsSystem::next_pos(position, velocity, time);
         location.position.x() = next_pos.x(); location.position.y() = next_pos.y();
     });
+}
+
+std::tuple<Vector2f,Vector2f> PhysicsSystem::bounding_box(const PhysicsSystem::RectVel &rect, sf::Time& time) {
+    Rect next_rect{next_pos(rect.rect.pos, rect.vel, time), rect.rect.size};
+
+    auto pos2 = rect.rect.pos + rect.rect.size;
+    auto next_pos2 = next_rect.pos + next_rect.size;
+
+    auto top_left = Vector2f{
+        std::min({rect.rect.pos.x(),pos2.x(),next_rect.pos.x(),next_pos2.x()}),
+        std::min({rect.rect.pos.y(),pos2.y(),next_rect.pos.y(),next_pos2.y()}),
+    };
+
+    auto bottom_right = Vector2f{
+            std::max({rect.rect.pos.x(),pos2.x(),next_rect.pos.x(),next_pos2.x()}),
+            std::max({rect.rect.pos.y(),pos2.y(),next_rect.pos.y(),next_pos2.y()}),
+    };
+
+    return {top_left, bottom_right};
 }

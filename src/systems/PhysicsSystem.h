@@ -63,6 +63,8 @@ private:
     bool line_rect_collision(const Line& line, const Rect& rect, Vector2f& collision_point, float& t, Vector2f& dir);
     bool rectVel_rect_collision(const RectVel& rect1, const Rect& rect2, sf::Time& time, Vector2f& cp, float& ct, Vector2f& dir);
     bool resolve_collision(RectVel& rect1, const Rect& rect2, sf::Time& time);
+
+    static std::tuple<Vector2f,Vector2f> bounding_box(const RectVel& rect, sf::Time& time);
 };
 
 
