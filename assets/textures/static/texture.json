@@ -12,5 +12,13 @@
         "pos": [32, 0]
       }
     ]
+    "filename": "grass.png",
+    "tiles":
+    [
+      {
+        "name": "Grass",
+        "pos": [0, 0]
+      }
+    ]
   }
 ]
