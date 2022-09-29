@@ -6,7 +6,7 @@
 
 #include "src/components/LocationC.h"
 #include "src/components/PlayerC.h"
-#include "src/components/CollisionC.h"
+#include "physics/CollisionC.h"
 #include "src/components/CameraLock.h"
 
 App::App()
@@ -74,7 +74,7 @@ void App::start() {
 
     auto player = registry.create();
 
-    registry.emplace<LocationC>(player, Vector3f{1.5,1.5,0}, Vector3f{0.01, 0.01, 0});
+    registry.emplace<LocationC>(player, Vector3f{0.5,0.5,0}, Vector3f{0.01, 0.01, 0});
     registry.emplace<PlayerC>(player);
     registry.emplace<CollisionC>(player, Vector2f{27-8,32-7}, Vector2f{8,7});
 //    registry.emplace<GravityC>(player);

@@ -5,7 +5,7 @@
 #include "PhysicsSystem.h"
 
 #include "src/components/LocationC.h"
-#include "src/components/CollisionC.h"
+#include "CollisionC.h"
 
 #ifndef ARX_DEBUG
 PhysicsSystem::PhysicsSystem(entt::registry *registry) : registry(registry) {}

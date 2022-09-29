@@ -15,12 +15,12 @@
 
 #include "assets/segments/l.h"
 
-#include "src/systems/SpriteSystem.h"
-#include "src/systems/TileSystem.h"
+#include "drawer/SpriteSystem.h"
+#include "drawer/TileSystem.h"
 #include "src/systems/ControlsSystem.h"
-#include "src/systems/PhysicsSystem.h"
-#include "src/systems/GravitySystem.h"
-#include "src/systems/CameraSystem.h"
+#include "physics/PhysicsSystem.h"
+#include "physics/GravitySystem.h"
+#include "drawer/CameraSystem.h"
 
 #define RESOLUTION Vector2i{1000, 680}
 

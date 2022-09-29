@@ -29,21 +29,21 @@ add_executable(Arx main.cpp
         src/components/MultispriteC.h
         include/entt.hpp
         assets/dynamic.h
-        src/systems/TileSystem.cpp
-        src/systems/TileSystem.h
-        src/systems/SpriteSystem.cpp
-        src/systems/SpriteSystem.h
+        src/drawer/TileSystem.cpp
+        src/drawer/TileSystem.h
+        src/drawer/SpriteSystem.cpp
+        src/drawer/SpriteSystem.h
         src/components/LocationC.h
         src/drawer/Multisprite.cpp
         src/systems/ControlsSystem.cpp
         src/systems/ControlsSystem.h
         src/components/PlayerC.h
-        src/components/CollisionC.h
-        src/systems/PhysicsSystem.cpp
-        src/systems/PhysicsSystem.h
+        src/physics/CollisionC.h
+        src/physics/PhysicsSystem.cpp
+        src/physics/PhysicsSystem.h
         main.h
-        src/components/GravityC.h
-        src/systems/GravitySystem.h src/systems/GravitySystem.cpp
+        src/physics/GravityC.h
+        src/physics/GravitySystem.h src/physics/GravitySystem.cpp
 
 
 
@@ -55,7 +55,7 @@ add_executable(Arx main.cpp
 
 
         src/components/CameraLock.h
-        src/systems/CameraSystem.cpp src/systems/CameraSystem.h)
+        src/drawer/CameraSystem.cpp src/drawer/CameraSystem.h)
 
 include_directories(src utility ../Arx)
 

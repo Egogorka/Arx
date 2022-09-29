@@ -9,7 +9,7 @@
 #include "include/entt.hpp"
 
 #include "src/components/LocationC.h"
-#include "src/components/GravityC.h"
+#include "GravityC.h"
 
 #include <SFML/Graphics.hpp>
 
