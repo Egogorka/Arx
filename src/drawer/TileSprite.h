@@ -45,10 +45,13 @@ protected:
     sf::Texture* texture = nullptr;
 
     // position of tile texture on texture sheet
-    Vector2i texture_pos; // size of texture is hardcoded to be 32x32px
+    Vector2i texture_pos;
+    // size of texture is hardcoded to be 32x32px
 
     sf::Sprite getSubTile(const Type& type, Direction dir);
 public:
+    TileSpriteFactory();
+
     TileSpriteFactory(sf::Texture &texture, Vector2i texture_pos);
 
     TileSprite getTileSprite(const Type& type);

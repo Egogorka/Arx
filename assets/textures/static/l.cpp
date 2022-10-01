@@ -35,23 +35,25 @@ std::shared_ptr<std::vector<TileSpriteFactory>> init_factories(const std::shared
     std::ifstream f("../assets/textures/static/texture.json");
 
     auto out = std::make_shared<std::vector<TileSpriteFactory>>();
-    json textures_data = json::parse(f);
+    json data = json::parse(f);
 
     // Walk the json to reserve memory for vector
     int size = 0;
-    for(auto& texture_data : textures_data) {
-        for (auto &tiles_data : texture_data["tiles"]) {
-            size += tiles_data.size();
+    for(auto& file_data : data) {
+        for (auto &tile_data : file_data["tiles"]) {
+            size += tile_data.size();
         }
     }
-    out->reserve(size);
+    out->resize(size);
 
     auto iter = textures->begin();
-    for(auto& texture_data : textures_data){
-        for(auto& tiles_data : texture_data["tiles"]) {
-            auto pos = Vector2i{tiles_data["pos"][0].get<int>(), tiles_data["pos"][1].get<int>()};
-            out->emplace_back(*iter, pos);
+    for(auto& file_data : data){
+        for(auto& tiles_data : file_data["tiles"]) {
+            auto pos  = Vector2i{tiles_data["pos"][0].get<int>(), tiles_data["pos"][1].get<int>()};
+            auto tile = tiles_data["name"].get<Tiles>();
+            out->at(static_cast<int>(tile)) = TileSpriteFactory(*iter, pos);
         }
+        iter++;
     }
     f.close();
     return out;

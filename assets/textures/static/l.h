@@ -14,9 +14,7 @@
 
 /**
  * Loads all textures in /assets/textures that are listed in textures.json
- * Outer vector is indexed by types that are defined in tiles.h,
- * Inner vector correspond to multiple textures of same tile (to make it randomizable)
- * (atm no inner vector for easier implementation)
+ * There is no particular order in textures themselves. It's just for storage
  * @return
  */
 std::shared_ptr<std::vector<sf::Texture>> load_static_textures();
@@ -24,7 +22,7 @@ std::shared_ptr<std::vector<sf::Texture>> load_static_textures();
 
 /**
  * Initializes all of TileSpriteFactories for usage in tile display
- * Vector is indexed by types that are defined in tiles.h
+ * Vector is ordered by enum in tiles.h
  * @param textures all textures
  * @return
  */

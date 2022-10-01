@@ -100,6 +100,9 @@ TileSprite TileSpriteFactory::getTileSprite(const Type& type) {
     return TileSprite{out};
 }
 
+TileSpriteFactory::TileSpriteFactory()
+: texture(nullptr), texture_pos() {}
+
 TileSprite::TileSprite(const std::array<sf::Sprite, 4>& subtiles) // NOLINT(modernize-pass-by-value)
 : subtiles(subtiles){}
 
