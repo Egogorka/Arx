@@ -1,22 +1,23 @@
 [
   {
     "filename": "brick.png",
-    "tiles":
-    [
+    "tiles": [
       {
-        "name": "Brick",
+        "name": "brick",
         "pos": [0, 0]
       },
       {
-        "name": "Pollution",
+        "name": "pollution",
         "pos": [32, 0]
       }
     ]
+  },
+  {
     "filename": "grass.png",
     "tiles":
     [
       {
-        "name": "Grass",
+        "name": "grass",
         "pos": [0, 0]
       }
     ]
