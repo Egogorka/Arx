@@ -13,6 +13,15 @@ using json = nlohmann::json;
 #include <iostream>
 #include <array>
 
+std::array<int,2> get_data_size(const json& data){
+    auto map = data["map"];
+
+    int row_length = map[0].get<std::string>().size();
+    int col_length = map.size();
+
+    return {row_length, col_length};
+}
+
 std::shared_ptr<std::vector<Segment>> load_segments() {
     std::ifstream f("../assets/segments/test_seg.json");
 
@@ -21,7 +30,7 @@ std::shared_ptr<std::vector<Segment>> load_segments() {
 
     out->reserve(array_data.size());
     for(auto& data : array_data){
-        auto size = data["size"].get<std::array<int,2>>();
+        auto size = get_data_size(data["visual"]);
         auto map = data["visual"]["map"].get<std::vector<std::string>>();
         auto symbols = data["visual"]["symbols"];
 

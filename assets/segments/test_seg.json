@@ -1,10 +1,10 @@
 [
   {
-    "size": [11, 11],
     "visual": {
       "symbols": {
         "#": "brick",
         "%": "pollution",
+        "G": "grass",
         " ": "none"
       },
       "map": [
@@ -18,7 +18,7 @@
         "# ### ### #",
         "#  #   #  #",
         "           ",
-        "#%%%%%%%%%#"
+        "#GGGGGG%%%%#"
         ]
     },
     "collision": {
